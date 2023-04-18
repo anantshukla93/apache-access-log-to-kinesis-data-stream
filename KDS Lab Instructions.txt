@@ -1,0 +1,22 @@
+# written by Anant Shukla
+
+##AMI ID - Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type | North Virginia AMI - ami-069aabeee6f53e7bf
+##Location of log files - /tmp/logs
+##AWS Region - North Virginia
+
+##scp log-generator-install.sh to EC2 instance (home directory of EC2 user)
+scp -i keyname log-generator-install.sh ec2-user@publicdnsname:.
+chmod u+x ~/log-generator-install.sh
+./log-generator-install.sh
+cd /tmp/logs
+sudo python ~/Fake-Apache-Log-Generator/apache-fake-log-gen.py -n 100 -o LOG
+ls
+
+##create kinesis stream with name demo in North Virginia DC - Provisioned - 1 shard
+##create IAM role for EC2 role giving access to kinesis stream and assign it to the ec2 instance.
+
+##scp convert_and_put_records_kds.py to EC2 instance (home directory of EC2 user)
+scp -i keyname convert_and_put_records_kds.py ec2-user@publicdnsname:.
+mv ./convert_and_put_records_kds.py /tmp/logs/convert_and_put_records_kds.py
+chmod u+x ./convert_and_put_records_kds.py
+./convert_and_put_records_kds.py
