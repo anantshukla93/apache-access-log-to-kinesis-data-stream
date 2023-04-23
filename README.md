@@ -28,6 +28,12 @@ This Python script converts the contents of an Apache access log file in the cur
 
 The script will then read the latest .log file in the current directory, convert its contents into a JSON format, and write it to the Kinesis Data Stream you specified.
 
+## Automate Record Generation and Submission to Kinesis Data Streams
+0. Copy infinite_production.sh to the logs directory (/tmp/logs/)
+1. Ensure that Steps 10 & 11 are completed successfully
+2. chmod u+x ./infinite_production.sh
+3. ./infinite_production.sh
+
 ## License
 This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
 
